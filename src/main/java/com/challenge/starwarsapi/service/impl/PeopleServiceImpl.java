@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PeopleServiceImpl  {
+public class PeopleServiceImpl implements PeopleService {
 
 
     private final PeopleClient peopleClient;
@@ -23,10 +23,11 @@ public class PeopleServiceImpl  {
     }
 
     public People getPeopleById(String id) {
-        return peopleClient.getPeopleById(id);
+         return peopleClient.getPeopleById(id);
     }
 
     public People getPeopleByName(String name) {
-        return peopleClient.getPeopleByName(name);
+        //return null;
+         return peopleClient.getPeopleByName(name);
     }
 }

@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@FeignClient(value = "starWarsClient", url = "https://www.swapi.tech/api", path = "/people")
+@FeignClient(value = "peopleClient", url = "https://www.swapi.tech/api", path = "/people")
 public interface PeopleClient {
 
     @GetMapping
     Page<People> getPeople(@SpringQueryMap Pageable pageable);
 
     @GetMapping("/{id}")
-    People getPeopleById(@PathVariable String id);
+    People getPeopleById(@PathVariable("id") String id);
 
     @GetMapping
-    People getPeopleByName(@RequestParam String name);
+    People getPeopleByName(@RequestParam("name") String name);
 
 }
