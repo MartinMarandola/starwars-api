@@ -33,10 +33,10 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     public PeopleByIdResponseDTO getPeopleById(String id) {
-         return peopleClient.getPeopleById(id);
+        return peopleClient.getPeopleById(id);
     }
 
     public PeopleSearchResponseDTO getPeopleByName(String name) {
-         return peopleClient.getPeopleByName(name);
+        return peopleClient.getPeopleByName(name);
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class GlobalControllerAdvice {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public ApiResponseDTO<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
         return new ApiResponseDTO<>(false, ex.getMessage(), null);
     }

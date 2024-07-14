@@ -6,15 +6,14 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 
-
-@NamedQuery(name = "User.findByEmail",query = "select u from User u where u.email=:email")
+@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email=:email")
 
 @Data
 @Entity
 @DynamicUpdate
 @DynamicInsert
 @Table(name = "users")
-public class User  {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

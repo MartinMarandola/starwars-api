@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 public interface PeopleService {
 
     Page<PeopleDTO> getPeople(Pageable pageable);
+
     PeopleByIdResponseDTO getPeopleById(String id);
+
     PeopleSearchResponseDTO getPeopleByName(String name);
 }

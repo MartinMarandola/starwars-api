@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,13 +25,12 @@ public class CustomerDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("Within loadUserByUsername {}",username);
+        log.info("Within loadUserByUsername {}", username);
         userDetail = userRepository.findByEmail(username);
 
-        if(!Objects.isNull(userDetail)){
-            return new org.springframework.security.core.userdetails.User(userDetail.getEmail(),userDetail.getPassword(),new ArrayList<>());
-        }
-        else{
+        if (!Objects.isNull(userDetail)) {
+            return new org.springframework.security.core.userdetails.User(userDetail.getEmail(), userDetail.getPassword(), new ArrayList<>());
+        } else {
             throw new UsernameNotFoundException("User not found");
         }
     }

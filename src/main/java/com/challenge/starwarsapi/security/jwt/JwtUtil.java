@@ -27,28 +27,28 @@ public class JwtUtil {
     tokens JWT. Se genera una clave aleatoria utilizando SecureRandom() y se asigna a la variable secret.
     */
     @PostConstruct
-    protected void init(){
+    protected void init() {
         byte[] apiKeySecretBytes = new byte[64]; // 512 bits
         new SecureRandom().nextBytes(apiKeySecretBytes);
         secret = Keys.hmacShaKeyFor(apiKeySecretBytes);
     }
 
-    public String extractUsername(String token){
-        return extractClaims(token,Claims::getSubject);
+    public String extractUsername(String token) {
+        return extractClaims(token, Claims::getSubject);
     }
 
-    public Date extractExpiration(String token){
-        return extractClaims(token,Claims::getExpiration);
+    public Date extractExpiration(String token) {
+        return extractClaims(token, Claims::getExpiration);
     }
 
-    public <T> T extractClaims(String token, Function<Claims,T> claimsResolver){
+    public <T> T extractClaims(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
     /* Este método verifica y extrae todos los reclamos del token JWT. Utiliza la clave secreta para
     verificar la firma del token y luego extrae los reclamos del payload.*/
-    public Claims extractAllClaims(String token){
+    public Claims extractAllClaims(String token) {
         //return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         return Jwts.parser()
                 .verifyWith(Keys.hmacShaKeyFor(secret.getEncoded()))
@@ -57,17 +57,17 @@ public class JwtUtil {
                 .getPayload();
     }
 
-    private Boolean isTokenExpired(String token){
+    private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(String username,String role){
-        Map<String,Object> claims = new HashMap<>();
-        claims.put("role",role);
-        return createToken(claims,username);
+    public String generateToken(String username, String role) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", role);
+        return createToken(claims, username);
     }
 
-    private String createToken(Map<String,Object> claims,String subject){
+    private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .claims(claims)
                 .subject(subject)
@@ -76,7 +76,7 @@ public class JwtUtil {
                 .signWith(Keys.hmacShaKeyFor(secret.getEncoded())).compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails){
+    public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
