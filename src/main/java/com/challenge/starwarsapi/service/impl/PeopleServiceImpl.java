@@ -19,7 +19,7 @@ import java.util.List;
 public class PeopleServiceImpl implements PeopleService {
 
     private final PeopleClient peopleClient;
-   
+
     public Page<PeopleDTO> getPeople(Pageable pageable) {
         int page = pageable.getPageNumber();
         int size = pageable.getPageSize();
