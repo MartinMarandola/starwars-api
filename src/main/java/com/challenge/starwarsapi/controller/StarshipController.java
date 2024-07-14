@@ -36,7 +36,7 @@ public class StarshipController {
     @GetMapping("/search")
     public ResponseEntity<StarshipSearchResponseDTO> getStarshipByName(@RequestParam("name") String name) {
         log.info("Requested: getStarshipByName(): {}", name);
-        StarshipSearchResponseDTO person = starshipService.getStarshipByName(name);
-        return ResponseEntity.ok(person);
+        StarshipSearchResponseDTO starship = starshipService.getStarshipByName(name);
+        return ResponseEntity.ok(starship);
     }
 }
