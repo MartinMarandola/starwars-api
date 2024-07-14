@@ -1,13 +1,10 @@
 package com.challenge.starwarsapi.handler;
 
 import com.challenge.starwarsapi.model.dto.ApiResponseDTO;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
+import org.springframework.web.bind.annotation.*;
 
 @ControllerAdvice
 @ResponseBody
