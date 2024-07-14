@@ -34,14 +34,14 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/user/login", "/user/signup", "/user/forgotPassword", "/people/**")
+                    request.requestMatchers("/user/login", "/user/signup", "/user/forgotPassword", "/people/**", "/films/**")
                             .permitAll()
                             .anyRequest()
                             .authenticated();
 
                 }).exceptionHandling(exceptionHandling ->
-                exceptionHandling.authenticationEntryPoint(authEntryPoint)
-        )
+                        exceptionHandling.authenticationEntryPoint(authEntryPoint)
+                )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
