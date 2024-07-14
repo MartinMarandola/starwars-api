@@ -2,6 +2,7 @@ package com.challenge.starwarsapi.service.impl;
 
 import com.challenge.starwarsapi.constant.ApiConstant;
 import com.challenge.starwarsapi.model.User;
+import com.challenge.starwarsapi.model.dto.ApiResponseDTO;
 import com.challenge.starwarsapi.model.dto.UserDTO;
 import com.challenge.starwarsapi.repository.UserRepository;
 import com.challenge.starwarsapi.security.CustomerDetailsService;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public ResponseEntity<String> signUp(Map<String, String> requestMap) {
+    public ResponseEntity<ApiResponseDTO<String>> signUp(Map<String, String> requestMap) {
         log.info("Internal user sign up {}",requestMap);
         try{
             if(validateSignUpMap(requestMap)){
@@ -67,29 +68,36 @@ public class UserServiceImpl implements UserService {
         }
         return ApiUtils.getResponseEntity(ApiConstant.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
     @Override
-    public ResponseEntity<String> login(Map<String, String> requestMap) {
-        log.info("Login User {}",requestMap);
-        try{
+    public ResponseEntity<ApiResponseDTO<String>> login(Map<String, String> requestMap) {
+        log.info("Login User {}", requestMap);
+        try {
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(requestMap.get("email"),requestMap.get("password"))
+                    new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password"))
             );
 
-            if(authentication.isAuthenticated()){
-
-                    return new ResponseEntity<>(
-                            "{\"token\":\"" +
-                                    jwtUtil.generateToken(customerDetailsService.getUserDetail().getEmail(),
-                                            customerDetailsService.getUserDetail().getRole()) + "\"}",
-                            HttpStatus.OK);
-
-
+            if (authentication.isAuthenticated()) {
+                String token = jwtUtil.generateToken(
+                        customerDetailsService.getUserDetail().getEmail(),
+                        customerDetailsService.getUserDetail().getRole()
+                );
+                ApiResponseDTO<String> responseDTO = new ApiResponseDTO<>(
+                        true,
+                        "Login successful",
+                         token
+                );
+                return new ResponseEntity<>(responseDTO, HttpStatus.OK);
             }
-        }catch (Exception exception){
-            log.error("{}",exception);
+        } catch (Exception exception) {
+            log.error("{}", exception);
         }
-        return new ResponseEntity<String>("{\"message\":\""+" Incorrect Credentials "+"\"}",HttpStatus.BAD_REQUEST);
+
+        ApiResponseDTO<String> responseDTO = new ApiResponseDTO<>(
+                false,
+                "Incorrect Credentials",
+                null
+        );
+        return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
     }
 
     @Override

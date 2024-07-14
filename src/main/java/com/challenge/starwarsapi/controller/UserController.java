@@ -1,6 +1,7 @@
 package com.challenge.starwarsapi.controller;
 
 import com.challenge.starwarsapi.constant.ApiConstant;
+import com.challenge.starwarsapi.model.dto.ApiResponseDTO;
 import com.challenge.starwarsapi.service.UserService;
 import com.challenge.starwarsapi.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> userSignUp(@RequestBody(required = true) Map<String,String> requestMap){
+    public ResponseEntity<ApiResponseDTO<String>> userSignUp(@RequestBody(required = true) Map<String,String> requestMap){
         try{
             return userService.signUp(requestMap);
         }catch (Exception exception){
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody(required = true) Map<String,String> requestMap){
+    public ResponseEntity<ApiResponseDTO<String>> login(@RequestBody(required = true) Map<String,String> requestMap){
         try{
             return userService.login(requestMap);
         }catch (Exception exception){
