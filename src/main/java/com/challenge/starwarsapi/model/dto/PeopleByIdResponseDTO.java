@@ -1,11 +1,9 @@
-package com.challenge.starwarsapi.dto;
+package com.challenge.starwarsapi.model.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
-public class People {
+@Data
+public class PeopleByIdResponseDTO {
     private String name;
     private String birth_year;
     private String eye_color;
