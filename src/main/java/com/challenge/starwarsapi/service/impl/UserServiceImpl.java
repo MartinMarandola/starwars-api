@@ -2,6 +2,7 @@ package com.challenge.starwarsapi.service.impl;
 
 import com.challenge.starwarsapi.constant.ApiConstant;
 import com.challenge.starwarsapi.model.User;
+import com.challenge.starwarsapi.model.dto.AddUserDTO;
 import com.challenge.starwarsapi.model.dto.ApiResponseDTO;
 import com.challenge.starwarsapi.model.dto.UserDTO;
 import com.challenge.starwarsapi.repository.UserRepository;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public ResponseEntity<ApiResponseDTO<String>> signUp(Map<String, String> requestMap) {
+    public ResponseEntity<ApiResponseDTO<AddUserDTO>> signUp(Map<String, String> requestMap) {
         log.info("Internal user sign up {}",requestMap);
         try{
             if(validateSignUpMap(requestMap)){
@@ -54,19 +55,20 @@ public class UserServiceImpl implements UserService {
                     requestMap.put("password", encodedPassword);
 
                     userRepository.save(getUserFromMap(requestMap));
-                    return ApiUtils.getResponseEntity("User successfully registered",HttpStatus.CREATED);
+                    AddUserDTO resUser = new AddUserDTO(requestMap.get("name"), requestMap.get("email"));
+                    return ApiUtils.getResponseEntity("User successfully registered",HttpStatus.CREATED, resUser);
                 }
                 else{
-                    return ApiUtils.getResponseEntity("User with this mail already exists", HttpStatus.BAD_REQUEST);
+                    return ApiUtils.getResponseEntity("User with this mail already exists", HttpStatus.BAD_REQUEST, null);
                 }
             }
             else{
-                return ApiUtils.getResponseEntity(ApiConstant.INVALID_DATA,HttpStatus.BAD_REQUEST);
+                return ApiUtils.getResponseEntity(ApiConstant.INVALID_DATA,HttpStatus.BAD_REQUEST, null);
             }
         }catch (Exception exception){
             exception.printStackTrace();
         }
-        return ApiUtils.getResponseEntity(ApiConstant.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+        return ApiUtils.getResponseEntity(ApiConstant.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR, null);
     }
     @Override
     public ResponseEntity<ApiResponseDTO<String>> login(Map<String, String> requestMap) {

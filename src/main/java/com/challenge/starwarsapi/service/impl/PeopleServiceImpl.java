@@ -18,14 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PeopleServiceImpl implements PeopleService {
 
-
     private final PeopleClient peopleClient;
-
-    /*public Page<People> getPeople(Pageable pageable) {
-        Page<People> personPage = peopleClient.getPeople(pageable);
-        return new PageImpl<>(personPage.getContent(), pageable, personPage.getTotalElements());
-    }*/
-
+   
     public Page<PeopleDTO> getPeople(Pageable pageable) {
         int page = pageable.getPageNumber();
         int size = pageable.getPageSize();

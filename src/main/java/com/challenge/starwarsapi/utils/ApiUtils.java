@@ -8,11 +8,11 @@ public class ApiUtils {
 
     private ApiUtils(){}
 
-    public static ResponseEntity<ApiResponseDTO<String>> getResponseEntity(String message, HttpStatus httpStatus) {
-        ApiResponseDTO<String> responseDTO = new ApiResponseDTO<>(
+    public static <T> ResponseEntity<ApiResponseDTO<T>> getResponseEntity(String message, HttpStatus httpStatus, T data) {
+        ApiResponseDTO<T> responseDTO = new ApiResponseDTO<>(
                 httpStatus.is2xxSuccessful(),
                 message,
-                null
+                data
         );
         return new ResponseEntity<>(responseDTO, httpStatus);
     }
