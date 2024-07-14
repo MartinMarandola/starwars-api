@@ -41,8 +41,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 token = authorizationHeader.substring(7);
                 username = jwtUtil.extractUsername(token);
                 claims = jwtUtil.extractAllClaims(token);
-                log.info("Extracted Username: {}", username);  // Log extracted username
-                log.info("Extracted Claims: {}", claims);      // Log extracted claims
             }
 
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
@@ -52,7 +50,6 @@ public class JwtFilter extends OncePerRequestFilter {
                             new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                     new WebAuthenticationDetailsSource().buildDetails(request);
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                    log.info("Authenticated User: {}", username);  // Log successful authentication
                 }
             }
             filterChain.doFilter(request,response);

@@ -1,4 +1,4 @@
-package com.challenge.starwarsapi.model.dto;
+package com.challenge.starwarsapi.model.dto.people;
 
 import lombok.Data;
 

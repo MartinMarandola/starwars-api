@@ -1,9 +1,10 @@
 package com.challenge.starwarsapi.service.impl;
 
 import com.challenge.starwarsapi.client.PeopleClient;
-import com.challenge.starwarsapi.model.dto.PeopleByIdResponseDTO;
-import com.challenge.starwarsapi.model.dto.PeopleDTO;
-import com.challenge.starwarsapi.model.dto.PeopleResponseDTO;
+import com.challenge.starwarsapi.model.dto.people.PeopleByIdResponseDTO;
+import com.challenge.starwarsapi.model.dto.people.PeopleDTO;
+import com.challenge.starwarsapi.model.dto.people.PeopleResponseDTO;
+import com.challenge.starwarsapi.model.dto.people.PeopleSearchResponseDTO;
 import com.challenge.starwarsapi.service.PeopleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,8 +42,7 @@ public class PeopleServiceImpl implements PeopleService {
          return peopleClient.getPeopleById(id);
     }
 
-    public PeopleByIdResponseDTO getPeopleByName(String name) {
-        //return null;
+    public PeopleSearchResponseDTO getPeopleByName(String name) {
          return peopleClient.getPeopleByName(name);
     }
 }

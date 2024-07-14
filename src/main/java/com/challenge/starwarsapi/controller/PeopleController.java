@@ -1,9 +1,9 @@
 package com.challenge.starwarsapi.controller;
 
-import com.challenge.starwarsapi.model.dto.PeopleByIdResponseDTO;
-import com.challenge.starwarsapi.model.dto.PeopleDTO;
+import com.challenge.starwarsapi.model.dto.people.PeopleByIdResponseDTO;
+import com.challenge.starwarsapi.model.dto.people.PeopleDTO;
+import com.challenge.starwarsapi.model.dto.people.PeopleSearchResponseDTO;
 import com.challenge.starwarsapi.service.PeopleService;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -30,15 +30,16 @@ public class PeopleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PeopleByIdResponseDTO> getPeopleById(@PathVariable String id) {
-        log.info("Requested: getPeopleById()");
+    public ResponseEntity<PeopleByIdResponseDTO> getPeopleById(@PathVariable("id") String id) {
+        log.info("Requested: getPeopleById(): ID {}", id);
         PeopleByIdResponseDTO person = peopleService.getPeopleById(id);
         return ResponseEntity.ok(person);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<PeopleByIdResponseDTO> getPeopleByName(@RequestParam @NotNull String name) {
-        PeopleByIdResponseDTO person = peopleService.getPeopleByName(name);
+    public ResponseEntity<PeopleSearchResponseDTO> getPeopleByName(@RequestParam("name") String name) {
+        log.info("Requested: getPeopleByName(): {}", name);
+        PeopleSearchResponseDTO person = peopleService.getPeopleByName(name);
         return ResponseEntity.ok(person);
     }
 }
