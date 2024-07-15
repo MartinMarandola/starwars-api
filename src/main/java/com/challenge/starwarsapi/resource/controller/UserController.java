@@ -1,9 +1,10 @@
-package com.challenge.starwarsapi.controller;
+package com.challenge.starwarsapi.resource.controller;
 
 import com.challenge.starwarsapi.constant.ApiConstant;
 import com.challenge.starwarsapi.model.dto.AddUserDTO;
 import com.challenge.starwarsapi.model.dto.ApiResponseDTO;
 import com.challenge.starwarsapi.model.dto.UserLoginDTO;
+import com.challenge.starwarsapi.resource.UserResource;
 import com.challenge.starwarsapi.service.UserService;
 import com.challenge.starwarsapi.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "/user")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserResource {
 
 
     private final UserService userService;

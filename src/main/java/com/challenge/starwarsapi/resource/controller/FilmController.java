@@ -1,8 +1,9 @@
-package com.challenge.starwarsapi.controller;
+package com.challenge.starwarsapi.resource.controller;
 
 import com.challenge.starwarsapi.model.dto.film.FilmByIdResponseDTO;
 import com.challenge.starwarsapi.model.dto.film.FilmResultDTO;
 import com.challenge.starwarsapi.model.dto.film.FilmSearchResponseDTO;
+import com.challenge.starwarsapi.resource.FilmResource;
 import com.challenge.starwarsapi.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/films")
 @RequiredArgsConstructor
-public class FilmController {
+public class FilmController implements FilmResource {
 
     private final FilmService filmService;
 

@@ -25,7 +25,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        //return NoOpPasswordEncoder.getInstance();
         return new BCryptPasswordEncoder();
     }
 
@@ -34,12 +33,20 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/user/login", "/user/signup", "/people/**", "/films/**", "/starships/**", "/vehicles/**")
-                            .permitAll()
-                            .anyRequest()
-                            .authenticated();
-
-                }).exceptionHandling(exceptionHandling ->
+                    request
+                            .requestMatchers("/user/login", "/user/signup", "/people/**", "/films/**", "/starships/**", "/vehicles/**").permitAll()
+                            .requestMatchers(
+                                    "/swagger-ui.html",
+                                    "/swagger-ui/**",
+                                    "/v3/api-docs/**",
+                                    "/swagger-resources/**",
+                                    "/swagger-resources/configuration/ui",
+                                    "/swagger-resources/configuration/security",
+                                    "/webjars/**"
+                            ).permitAll()
+                            .anyRequest().authenticated();
+                })
+                .exceptionHandling(exceptionHandling ->
                         exceptionHandling.authenticationEntryPoint(authEntryPoint)
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -51,5 +58,5 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
 }
+

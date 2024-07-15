@@ -1,8 +1,9 @@
-package com.challenge.starwarsapi.controller;
+package com.challenge.starwarsapi.resource.controller;
 
 import com.challenge.starwarsapi.model.dto.starship.StarshipByIdResponseDTO;
 import com.challenge.starwarsapi.model.dto.starship.StarshipDTO;
 import com.challenge.starwarsapi.model.dto.starship.StarshipSearchResponseDTO;
+import com.challenge.starwarsapi.resource.StarshipResource;
 import com.challenge.starwarsapi.service.StarshipService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/starships")
 @RequiredArgsConstructor
-public class StarshipController {
+public class StarshipController implements StarshipResource {
 
     public final StarshipService starshipService;
 

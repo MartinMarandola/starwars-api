@@ -1,8 +1,9 @@
-package com.challenge.starwarsapi.controller;
+package com.challenge.starwarsapi.resource.controller;
 
 import com.challenge.starwarsapi.model.dto.people.PeopleByIdResponseDTO;
 import com.challenge.starwarsapi.model.dto.people.PeopleDTO;
 import com.challenge.starwarsapi.model.dto.people.PeopleSearchResponseDTO;
+import com.challenge.starwarsapi.resource.PeopleResource;
 import com.challenge.starwarsapi.service.PeopleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/people")
 @RequiredArgsConstructor
-public class PeopleController {
+public class PeopleController implements PeopleResource {
 
 
     private final PeopleService peopleService;

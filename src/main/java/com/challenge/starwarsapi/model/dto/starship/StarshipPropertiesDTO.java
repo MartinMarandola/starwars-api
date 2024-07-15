@@ -1,8 +1,10 @@
 package com.challenge.starwarsapi.model.dto.starship;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema(description = "Starship properties DTO")
 public class StarshipPropertiesDTO {
     private String model;
     private String starship_class;

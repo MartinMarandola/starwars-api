@@ -1,8 +1,10 @@
 package com.challenge.starwarsapi.model.dto.film;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema(description = "Film properties")
 public class FilmPropertiesDTO {
     private String[] characters;
     private String[] planets;
