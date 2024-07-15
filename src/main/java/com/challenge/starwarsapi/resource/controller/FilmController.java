@@ -1,6 +1,7 @@
 package com.challenge.starwarsapi.resource.controller;
 
 import com.challenge.starwarsapi.model.dto.film.FilmByIdResponseDTO;
+import com.challenge.starwarsapi.model.dto.film.FilmResponseDTO;
 import com.challenge.starwarsapi.model.dto.film.FilmResultDTO;
 import com.challenge.starwarsapi.model.dto.film.FilmSearchResponseDTO;
 import com.challenge.starwarsapi.resource.FilmResource;
@@ -22,9 +23,9 @@ public class FilmController implements FilmResource {
     private final FilmService filmService;
 
     @GetMapping
-    public ResponseEntity<Page<FilmResultDTO>> getFilms(@PageableDefault(size = 10) Pageable pageable){
+    public ResponseEntity<FilmResponseDTO> getFilms(){
         log.info("Requested: getFilms()");
-        return ResponseEntity.ok(filmService.getFilm(pageable));
+        return ResponseEntity.ok(filmService.getFilm());
     }
 
     @GetMapping("/{id}")

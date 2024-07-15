@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 @Schema(description = "Get starship by id DTO")
 public class StarshipByIdResponseDTO {
+    private String message;
     private StarshipResultDTO result;
 }

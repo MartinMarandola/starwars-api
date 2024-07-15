@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 @Schema(description = "Get people by id DTO")
 public class PeopleByIdResponseDTO {
+    private String message;
     private PeopleResultDTO result;
 }

@@ -19,13 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PeopleController implements PeopleResource {
 
-
     private final PeopleService peopleService;
 
     @GetMapping
-    public ResponseEntity<Page<PeopleDTO>> getPeople(
-            @PageableDefault(size = 10) Pageable pageable
-    ) {
+    public ResponseEntity<Page<PeopleDTO>> getPeople(@PageableDefault(size = 10) Pageable pageable) {
         log.info("Requested: getPeople()");
         return ResponseEntity.ok(peopleService.getPeople(pageable));
     }

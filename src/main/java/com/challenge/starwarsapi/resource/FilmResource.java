@@ -1,6 +1,7 @@
 package com.challenge.starwarsapi.resource;
 
 import com.challenge.starwarsapi.model.dto.film.FilmByIdResponseDTO;
+import com.challenge.starwarsapi.model.dto.film.FilmResponseDTO;
 import com.challenge.starwarsapi.model.dto.film.FilmResultDTO;
 import com.challenge.starwarsapi.model.dto.film.FilmSearchResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,7 +26,7 @@ public interface FilmResource {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
     })
-    ResponseEntity<Page<FilmResultDTO>> getFilms(@Parameter(description = "Pageable object") Pageable pageable);
+    ResponseEntity<FilmResponseDTO> getFilms();
 
     @Operation(
             summary = "Get Film method of SWAPI by id",

@@ -8,5 +8,6 @@ import java.util.List;
 @Data
 @Schema(description = "Get starship by name DTO")
 public class StarshipSearchResponseDTO {
+    private String message;
     private List<StarshipResultDTO> result;
 }

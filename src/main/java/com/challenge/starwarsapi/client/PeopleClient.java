@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface PeopleClient {
 
     @GetMapping
-    PeopleResponseDTO getPeople(@RequestParam("page") int page, @RequestParam("size") int size);
+    PeopleResponseDTO getPeople(@RequestParam("page") int page, @RequestParam("limit") int limit);
 
     @GetMapping("/{id}")
     PeopleByIdResponseDTO getPeopleById(@PathVariable("id") String id);

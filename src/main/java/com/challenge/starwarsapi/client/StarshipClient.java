@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface StarshipClient {
 
     @GetMapping
-    StarshipResponseDTO getStarships(@RequestParam("page") int page, @RequestParam("size") int size);
+    StarshipResponseDTO getStarships(@RequestParam("page") int page, @RequestParam("limit") int limit);
 
     @GetMapping("/{id}")
     StarshipByIdResponseDTO getStarshipById(@PathVariable("id") String id);

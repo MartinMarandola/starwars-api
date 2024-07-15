@@ -9,5 +9,6 @@ import java.util.List;
 @Data
 @Schema(description = "Get film by name DTO")
 public class FilmSearchResponseDTO {
+    private String message;
     private List<FilmResultDTO> result;
 }

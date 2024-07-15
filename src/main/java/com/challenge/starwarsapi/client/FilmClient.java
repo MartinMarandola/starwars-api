@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface FilmClient {
 
     @GetMapping
-    FilmResponseDTO getFilms(@RequestParam("page") int page, @RequestParam("size") int size);
+    FilmResponseDTO getFilms();
 
     @GetMapping("/{id}")
     FilmByIdResponseDTO getFilmById(@PathVariable("id") String id);

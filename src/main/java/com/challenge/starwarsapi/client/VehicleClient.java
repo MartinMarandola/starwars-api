@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface VehicleClient {
 
     @GetMapping
-    VehicleResponseDTO getVehicles(@RequestParam("page") int page, @RequestParam("size") int size);
+    VehicleResponseDTO getVehicles(@RequestParam("page") int page, @RequestParam("limit") int limit);
 
     @GetMapping("/{id}")
     VehicleByIdResponseDTO getVehicleById(@PathVariable("id") String id);

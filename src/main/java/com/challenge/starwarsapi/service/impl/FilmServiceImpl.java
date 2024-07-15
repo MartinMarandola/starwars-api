@@ -7,9 +7,7 @@ import com.challenge.starwarsapi.model.dto.film.FilmResultDTO;
 import com.challenge.starwarsapi.model.dto.film.FilmSearchResponseDTO;
 import com.challenge.starwarsapi.service.FilmService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +19,11 @@ public class FilmServiceImpl implements FilmService {
     private final FilmClient filmClient;
 
     @Override
-    public Page<FilmResultDTO> getFilm(Pageable pageable) {
-        int page = pageable.getPageNumber();
-        int size = pageable.getPageSize();
+    public FilmResponseDTO getFilm() {
 
-        FilmResponseDTO response = filmClient.getFilms(page, size);
+       return filmClient.getFilms();
 
-        List<FilmResultDTO> films = response.getResult();
-        int totalRecords = response.getTotalRecords();
 
-        return new PageImpl<>(films, pageable, totalRecords);
     }
 
     public FilmByIdResponseDTO getFilmById (String id){

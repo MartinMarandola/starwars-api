@@ -25,7 +25,9 @@ public interface PeopleResource {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
     })
-    ResponseEntity<Page<PeopleDTO>> getPeople(@Parameter(description = "Pageable object") Pageable pageable);
+    ResponseEntity<Page<PeopleDTO>> getPeople(@Parameter(description = "Pageable object",
+            example = "curl --location 'http://server:port/people?page=2&size=20' \\\n" +
+                    "--header 'Authorization: ••••••' ") Pageable pageable);
 
     @Operation(
             summary = "Get People method of SWAPI by id",
