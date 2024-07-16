@@ -1,8 +1,6 @@
 package com.challenge.starwarsapi.service.impl;
 
 import com.challenge.starwarsapi.client.StarshipClient;
-import com.challenge.starwarsapi.model.dto.people.PeopleDTO;
-import com.challenge.starwarsapi.model.dto.people.PeopleResponseDTO;
 import com.challenge.starwarsapi.model.dto.starship.StarshipByIdResponseDTO;
 import com.challenge.starwarsapi.model.dto.starship.StarshipDTO;
 import com.challenge.starwarsapi.model.dto.starship.StarshipResponseDTO;
@@ -21,6 +19,7 @@ import java.util.List;
 public class StarshipServiceImpl implements StarshipService {
 
     private final StarshipClient starshipClient;
+
     @Override
     public Page<StarshipDTO> getStarships(Pageable pageable) {
         int page = pageable.getPageNumber();

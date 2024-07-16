@@ -1,4 +1,4 @@
-package com.challenge.starwarsapi.model.dto;
+package com.challenge.starwarsapi.model.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

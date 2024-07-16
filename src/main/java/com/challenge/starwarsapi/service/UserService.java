@@ -1,9 +1,9 @@
 package com.challenge.starwarsapi.service;
 
-import com.challenge.starwarsapi.model.dto.AddUserDTO;
+import com.challenge.starwarsapi.model.dto.user.AddUserDTO;
 import com.challenge.starwarsapi.model.dto.ApiResponseDTO;
-import com.challenge.starwarsapi.model.dto.UserDTO;
-import com.challenge.starwarsapi.model.dto.UserLoginDTO;
+import com.challenge.starwarsapi.model.dto.user.UserDTO;
+import com.challenge.starwarsapi.model.dto.user.UserLoginDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -15,6 +15,7 @@ public interface UserService {
 
     ResponseEntity<ApiResponseDTO<UserLoginDTO>> login(Map<String, String> requestMap);
 
-    ResponseEntity<List<UserDTO>> getAllUsers();
+    ResponseEntity<ApiResponseDTO<List<UserDTO>>> getAllUsers();
+
 
 }

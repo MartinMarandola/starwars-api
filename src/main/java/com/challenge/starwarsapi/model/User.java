@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 
 @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email=:email")
+@NamedQuery(name = "User.getAllUsers",query = "select new com.challenge.starwarsapi.model.dto.user.UserDTO(u.id,u.name,u.email,u.role) from User u where u.role='user'")
 
 @Data
 @Entity

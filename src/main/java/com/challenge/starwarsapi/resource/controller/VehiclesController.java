@@ -30,14 +30,14 @@ public class VehiclesController implements VehicleResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<VehicleByIdResponseDTO> getVehicleById(@PathVariable("id") String id) {
-        log.info("Requested: getVehicleById(): ID {}", id);
+        log.info("Requested: getVehicleById({}):", id);
         VehicleByIdResponseDTO vehicle = vehicleService.getVehicleById(id);
         return ResponseEntity.ok(vehicle);
     }
 
     @GetMapping("/search")
     public ResponseEntity<VehicleSearchResponseDTO> getVehicleByName(@RequestParam("name") String name) {
-        log.info("Requested: getStarshipByName(): {}", name);
+        log.info("Requested: getStarshipByName({}):", name);
         VehicleSearchResponseDTO vehicle = vehicleService.getVehicleByName(name);
         return ResponseEntity.ok(vehicle);
     }

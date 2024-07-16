@@ -29,14 +29,14 @@ public class PeopleController implements PeopleResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<PeopleByIdResponseDTO> getPeopleById(@PathVariable("id") String id) {
-        log.info("Requested: getPeopleById(): ID {}", id);
+        log.info("Requested: getPeopleById({}):", id);
         PeopleByIdResponseDTO person = peopleService.getPeopleById(id);
         return ResponseEntity.ok(person);
     }
 
     @GetMapping("/search")
     public ResponseEntity<PeopleSearchResponseDTO> getPeopleByName(@RequestParam("name") String name) {
-        log.info("Requested: getPeopleByName(): {}", name);
+        log.info("Requested: getPeopleByName({}):", name);
         PeopleSearchResponseDTO person = peopleService.getPeopleByName(name);
         return ResponseEntity.ok(person);
     }

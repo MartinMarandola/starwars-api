@@ -29,14 +29,14 @@ public class StarshipController implements StarshipResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<StarshipByIdResponseDTO> getStarshipById(@PathVariable("id") String id) {
-        log.info("Requested: getStarshipById(): ID {}", id);
+        log.info("Requested: getStarshipById({}):", id);
         StarshipByIdResponseDTO starship = starshipService.getStarshipById(id);
         return ResponseEntity.ok(starship);
     }
 
     @GetMapping("/search")
     public ResponseEntity<StarshipSearchResponseDTO> getStarshipByName(@RequestParam("name") String name) {
-        log.info("Requested: getStarshipByName(): {}", name);
+        log.info("Requested: getStarshipByName({}):", name);
         StarshipSearchResponseDTO starship = starshipService.getStarshipByName(name);
         return ResponseEntity.ok(starship);
     }

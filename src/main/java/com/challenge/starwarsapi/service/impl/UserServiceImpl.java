@@ -2,10 +2,10 @@ package com.challenge.starwarsapi.service.impl;
 
 import com.challenge.starwarsapi.constant.ApiConstant;
 import com.challenge.starwarsapi.model.User;
-import com.challenge.starwarsapi.model.dto.AddUserDTO;
+import com.challenge.starwarsapi.model.dto.user.AddUserDTO;
 import com.challenge.starwarsapi.model.dto.ApiResponseDTO;
-import com.challenge.starwarsapi.model.dto.UserDTO;
-import com.challenge.starwarsapi.model.dto.UserLoginDTO;
+import com.challenge.starwarsapi.model.dto.user.UserDTO;
+import com.challenge.starwarsapi.model.dto.user.UserLoginDTO;
 import com.challenge.starwarsapi.repository.UserRepository;
 import com.challenge.starwarsapi.security.CustomerDetailsService;
 import com.challenge.starwarsapi.security.jwt.JwtFilter;
@@ -47,12 +47,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<ApiResponseDTO<AddUserDTO>> signUp(Map<String, String> requestMap) {
-        log.info("Internal user sign up {}", requestMap);
         try {
             if (validateSignUpMap(requestMap)) {
                 User user = userRepository.findByEmail(requestMap.get("email"));
                 if (Objects.isNull(user)) {
-                    // Encode password antes de guardar en DB
                     String encodedPassword = passwordEncoder.encode(requestMap.get("password"));
                     requestMap.put("password", encodedPassword);
 
@@ -66,14 +64,13 @@ public class UserServiceImpl implements UserService {
                 return ApiUtils.getResponseEntity(ApiConstant.INVALID_DATA, HttpStatus.BAD_REQUEST, null);
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            log.error("", exception);
         }
         return ApiUtils.getResponseEntity(ApiConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR, null);
     }
 
     @Override
     public ResponseEntity<ApiResponseDTO<UserLoginDTO>> login(Map<String, String> requestMap) {
-        log.info("Login User {}", requestMap);
         User user = userRepository.findByEmail(requestMap.get("email"));
         try {
 
@@ -103,9 +100,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        return null;
+    public ResponseEntity<ApiResponseDTO<List<UserDTO>>> getAllUsers() {
+        try {
+            if (jwtFilter.isAdmin()) {
+                List<UserDTO> userDTOS = userRepository.getAllUsers();
+                return ApiUtils.getResponseEntity("Users list", HttpStatus.OK, userDTOS);
+            } else {
+                return ApiUtils.getResponseEntity(ApiConstant.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED, null);
+            }
+        } catch (Exception exception) {
+            log.error("", exception);
+        }
+        return ApiUtils.getResponseEntity(ApiConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR, null);
     }
+
 
     private boolean validateSignUpMap(Map<String, String> requestMap) {
         return requestMap.containsKey("name") && requestMap.containsKey("email") && requestMap.containsKey("password");

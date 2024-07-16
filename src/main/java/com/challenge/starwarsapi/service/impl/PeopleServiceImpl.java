@@ -20,6 +20,7 @@ public class PeopleServiceImpl implements PeopleService {
 
     private final PeopleClient peopleClient;
 
+    @Override
     public Page<PeopleDTO> getPeople(Pageable pageable) {
         int page = pageable.getPageNumber();
         int size = pageable.getPageSize();
@@ -32,10 +33,12 @@ public class PeopleServiceImpl implements PeopleService {
         return new PageImpl<>(people, pageable, totalRecords);
     }
 
+    @Override
     public PeopleByIdResponseDTO getPeopleById(String id) {
         return peopleClient.getPeopleById(id);
     }
 
+    @Override
     public PeopleSearchResponseDTO getPeopleByName(String name) {
         return peopleClient.getPeopleByName(name);
     }
