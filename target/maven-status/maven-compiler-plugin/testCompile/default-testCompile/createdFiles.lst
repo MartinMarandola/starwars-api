@@ -1,0 +1,3 @@
+com\challenge\starwarsapi\StarWarsApiApplicationTests.class
+com\challenge\starwarsapi\service\impl\PeopleServiceImplTests.class
+com\challenge\starwarsapi\service\impl\StarshipServiceImplTests.class
